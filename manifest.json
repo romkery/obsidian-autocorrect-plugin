@@ -1,11 +1,11 @@
 {
-	"id": "sample-plugin",
-	"name": "Sample Plugin",
+	"id": "autocorrect",
+	"name": "Autocorrect",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "Demonstrates some of the capabilities of the Obsidian API.",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md",
-	"fundingUrl": "https://obsidian.md/pricing",
+	"description": "Corrects words",
+	"author": "romkery",
+	"authorUrl": "https://github.com/romkery",
+	"fundingUrl": "https://github.com/romkery",
 	"isDesktopOnly": false
 }

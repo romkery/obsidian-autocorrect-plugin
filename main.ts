@@ -1,5 +1,6 @@
 import {
 	App,
+	Editor,
 	MarkdownView,
 	Modal,
 	Notice,
@@ -7,8 +8,7 @@ import {
 	PluginSettingTab,
 	Setting,
 } from "obsidian";
-
-// Remember to rename these classes and interfaces!
+import Textgears from "textgears-api";
 
 interface MyPluginSettings {
 	mySetting: string;
@@ -30,9 +30,10 @@ export default class MyPlugin extends Plugin {
 			"Sample Plugin",
 			(evt: MouseEvent) => {
 				// Called when the user clicks the icon.
-				new Notice("This is a romkery!");
+				new Notice("This is a romkdery!");
 			},
 		);
+
 		// Perform additional things with the ribbon
 		ribbonIconEl.addClass("my-plugin-ribbon-class");
 
@@ -54,6 +55,27 @@ export default class MyPlugin extends Plugin {
 					// This command will only show up in Command Palette when the check function returns true
 					return true;
 				}
+			},
+		});
+
+		this.addCommand({
+			id: "format word",
+			name: "Format word",
+			editorCallback: (editor: Editor) => {
+				const selection = editor.getSelection();
+				const textgearsApi = Textgears("BxRbYv0UjgEDdQfy", {
+					language: "ru-RU",
+					ai: true,
+				});
+				textgearsApi
+					.checkGrammar(selection)
+					.then((data) => {
+						console.log(data.response, "aa");
+						for (const error of data.response.errors) {
+							editor.replaceSelection(error.better[0]);
+						}
+					})
+					.catch((err) => {});
 			},
 		});
 
